@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Semantic Layout Demo</title>
+  <style>
+    :root {
+      --ink: #1c1f1a;
+      --paper: #f7f5ef;
+      --moss: #3f5d3a;
+      --clay: #a8552f;
+      --line: #d8d3c4;
+      --gap: 1.5rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Georgia", "Iowan Old Style", serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* ---------- HEADER : fixed-height box, border adds visual weight ----- */
+    header.site-head {
+      position: sticky;
+      top: 0;
+      background: var(--paper);
+      border-bottom: 2px solid var(--ink);
+      padding: 1.25rem 2rem;
+      /* padding = inner space, inside the border */
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1rem;
+      z-index: 10;
+    }
+
+    .site-head .name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    nav.site-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.75rem;
+    }
+
+    nav.site-nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.95rem;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.site-nav a:hover,
+    nav.site-nav a:focus-visible {
+      border-bottom-color: var(--clay);
+    }
+
+    /* ---------- HERO : uses margin to separate from header, padding for inner breathing room */
+    section.hero {
+      max-width: 62rem;
+      margin: 3rem auto 4rem;
+      /* margin = outer space, pushes hero away from header/next section */
+      padding: 0 2rem;
+    }
+
+    .hero .eyebrow {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: var(--moss);
+      font-size: 0.9rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.1;
+      margin: 0.5rem 0 1rem;
+      max-width: 20ch;
+    }
+
+    .hero p {
+      max-width: 46ch;
+      color: #4a4a42;
+    }
+
+    /* ---------- MAIN CONTENT : CSS grid, each <article> is its own box ---- */
+    main {
+      max-width: 62rem;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    section.work h2,
+    section.about h2 {
+      font-size: 1.6rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.5rem;
+      margin-bottom: var(--gap);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: var(--gap);
+      margin-bottom: 4rem;
+    }
+
+    article.project {
+      border: 1px solid var(--line);
+      /* border sits between padding and margin */
+      padding: 1.25rem;
+      position: relative;
+      /* establishes a positioning context for the tag below */
+    }
+
+    article.project .tag {
+      position: absolute;
+      /* positioned relative to the nearest ancestor with position set */
+      top: -0.7rem;
+      left: 1.25rem;
+      background: var(--moss);
+      color: var(--paper);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.72rem;
+      padding: 0.15rem 0.5rem;
+    }
+
+    article.project h3 {
+      margin-top: 0.5rem;
+      font-size: 1.15rem;
+    }
+
+    article.project p {
+      color: #4a4a42;
+      font-size: 0.95rem;
+      margin-top: 0.4rem;
+    }
+
+    section.about {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    section.about .about-text {
+      flex: 2 1 20rem;
+    }
+
+    aside.skills {
+      flex: 1 1 12rem;
+      border-left: 3px solid var(--clay);
+      padding-left: 1rem;
+    }
+
+    aside.skills ul {
+      list-style: none;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    aside.skills li {
+      margin-bottom: 0.4rem;
+    }
+
+    footer.site-foot {
+      border-top: 2px solid var(--ink);
+      padding: 1.5rem 2rem;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ---------- Responsive: collapse nav + stack about section on narrow screens */
+    @media (max-width: 40rem) {
+      header.site-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav.site-nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      section.about {
+        flex-direction: column;
+      }
+
+      aside.skills {
+        border-left: none;
+        border-top: 3px solid var(--clay);
+        padding-left: 0;
+        padding-top: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-head">
+    <span class="name">Ayush Sisodia</span>
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <p class="eyebrow">Full Stack Developer &amp; Security Enthusiast</p>
+    <h1>I build web systems, then try to break them safely.</h1>
+    <p>Third-year CSE student focused on secure, full-stack applications — from
+      layered architecture to deployment and version control.</p>
+  </section>
+
+  <main>
+    <section class="work" id="work">
+      <h2>Selected Work</h2>
+      <div class="project-grid">
+        <article class="project">
+          <span class="tag">Web App</span>
+          <h3>TrafficLens</h3>
+          <p>A proof-of-concept for detecting AI-generated vs. human network traffic.</p>
+        </article>
+        <article class="project">
+          <span class="tag">Dashboard</span>
+          <h3>TokenWatch</h3>
+          <p>A React-based dashboard for enterprise AI token-spend governance.</p>
+        </article>
+        <article class="project">
+          <span class="tag">Security</span>
+          <h3>Spear-Phishing Simulation</h3>
+          <p>An 8-phase simulation mapped to MITRE ATT&amp;CK banking TTPs.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-text">
+        <h2>About</h2>
+        <p>I'm a B.Tech CSE student who cares about how systems are structured
+          end-to-end — presentation, logic, and data — and how each layer can
+          fail or be secured. I like clean directory structures and disciplined
+          Git history as much as clean UI.</p>
+      </div>
+      <aside class="skills">
+        <ul>
+          <li>HTML5 / CSS3</li>
+          <li>Git &amp; GitHub</li>
+          <li>UNIX Shell</li>
+          <li>Network Security</li>
+        </ul>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-foot" id="contact">
+    <span>&copy; 2026 Ayush Sisodia</span>
+    <span>ayush@example.com</span>
+  </footer>
+
+</body>
+
+</html>
+>
